@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { History } from 'history';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Layout from '../components/Layout';
 import {
@@ -29,7 +31,11 @@ const HomeForFirstTime: React.FC<HomeForFirstTimeProps> = ({ onNext }) => (
   </>
 );
 
-const HomeForDefault: React.FC = () => (
+type HomeForDefaultProps = {
+  history: History,
+};
+
+const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => (
   <>
     <TextForTitle>
       지금까지 총 <Text>0</Text>장의 감사장을 보내셨네요!
@@ -37,7 +43,9 @@ const HomeForDefault: React.FC = () => (
     <CardList
       cards={[]}
     />
-    <Button>
+    <Button
+      onClick={() => history.push('/create')}
+    >
       감사장 선물하기
     </Button>
   </>
@@ -45,10 +53,11 @@ const HomeForDefault: React.FC = () => (
 
 interface RenderIndicatorProps extends HomeForFirstTimeProps {
   stage: number;
+  history: History;
   onNext: () => void;
 }
 
-const RenderIndicator: React.FC<RenderIndicatorProps> = ({ stage, onNext }) => {
+const RenderIndicator: React.FC<RenderIndicatorProps> = ({ stage, history, onNext }) => {
   switch (stage) {
     case 0:
       return (
@@ -58,12 +67,14 @@ const RenderIndicator: React.FC<RenderIndicatorProps> = ({ stage, onNext }) => {
       );
     default:
       return (
-        <HomeForDefault />
+        <HomeForDefault
+          history={history}
+        />
       );
   }
 };
 
-const Home: React.FC = () => {
+const Home: React.FC<RouteComponentProps> = ({ history }) => {
   const [stage, setStage] = useState<number>(0);
   const onClickNextStage = () => setStage(stage + 1);
 
@@ -71,10 +82,11 @@ const Home: React.FC = () => {
     <Layout>
       <RenderIndicator
         stage={stage}
+        history={history}
         onNext={onClickNextStage}
       />
     </Layout>
   );
 };
 
-export default Home;
+export default withRouter(Home);
