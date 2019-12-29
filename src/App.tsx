@@ -33,4 +33,11 @@ const App: React.FC = () => {
 export default App;
 
 const AppContainer = styled.div`
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 `;

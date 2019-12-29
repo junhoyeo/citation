@@ -1,0 +1,14 @@
+body,
+button,
+input {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+button,
+input {
+  border: 0;
+
+  &:focus {
+    outline: none;
+  }
+}

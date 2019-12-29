@@ -14,4 +14,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
 export default Layout;
 
 const Container = styled.main`
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 500px) {
+    width: 80%;
+  }
 `;

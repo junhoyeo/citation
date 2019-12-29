@@ -39,6 +39,7 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
       </Button>
       <Button
         onClick={onClickReset}
+        primary={false}
       >
         초기화
       </Button>
