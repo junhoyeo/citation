@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Layout from '../components/Layout';
 import Field from '../components/molecules/Field';
 import Button from '../components/atoms/Button';
 
-const Create: React.FC = () => {
+const encodeString = (value: string) => {
+  return (
+    window.btoa(
+      encodeURIComponent(value)
+    )
+      .replace(/\./gi, '+')
+      .replace(/_/gi, '/')
+      .replace(/-/gi, '=')
+  );
+};
+
+const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [name, setName] = useState<string>('');
   const [thanks, setThanks] = useState<string>('');
   const [prefix, setPrefix] = useState<string>('');
@@ -25,7 +37,15 @@ const Create: React.FC = () => {
   const onChangePrefix = (e: React.ChangeEvent<HTMLInputElement>) =>
     onChange(e, setPrefix);
 
-  const onClickGenerate = () => {};
+  const onClickGenerate = () => {
+    const encodedData = [
+      encodeString(name),
+      encodeString(thanks),
+      encodeString(prefix),
+    ].join('|');
+
+    history.push(`/result/${encodedData}`);
+  };
 
   return (
     <Layout>
@@ -53,4 +73,4 @@ const Create: React.FC = () => {
   );
 };
 
-export default Create;
+export default withRouter(Create);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { History } from 'history';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { History } from 'history';
 
 import Layout from '../components/Layout';
 import {

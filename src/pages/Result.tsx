@@ -26,7 +26,7 @@ const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
       callback: (value: string) => void
     ) => callback(
       decodeURIComponent(
-        window.atob(encodedString)
+        window.atob(encodedString),
       )
         .replace(/\+/gi, '.')
         .replace(/\//gi, '_')
