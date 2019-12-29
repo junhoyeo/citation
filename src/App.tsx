@@ -22,7 +22,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/create" component={Create} />
-            <Route exact path="/result" component={Result} />
+            <Route exact path="/result/:encodedData" component={Result} />
           </Switch>
         </AppContainer>
       </Router>
