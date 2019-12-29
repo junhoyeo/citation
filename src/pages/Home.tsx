@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 
 import Layout from '../components/Layout';
 import {
+  Text,
   TextForTitle,
   TextForParagraph,
 } from '../components/atoms/Text';
 import Button from '../components/atoms/Button';
+import CardList from '../components/templates/CardList';
 
-interface IHomeScreenProps {
-  onNext: () => void;
+interface HomeForFirstTimeProps {
+  onNext?: () => void;
 }
 
-const HomeForFirstTime: React.FC<IHomeScreenProps> = ({ onNext }) => (
+const HomeForFirstTime: React.FC<HomeForFirstTimeProps> = ({ onNext }) => (
   <>
     <TextForTitle>
       반가워요!
@@ -27,12 +29,26 @@ const HomeForFirstTime: React.FC<IHomeScreenProps> = ({ onNext }) => (
   </>
 );
 
-interface IRenderIndicatorProps extends IHomeScreenProps {
+const HomeForDefault: React.FC = () => (
+  <>
+    <TextForTitle>
+      지금까지 총 <Text>0</Text>장의 감사장을 보내셨네요!
+    </TextForTitle>
+    <CardList
+      cards={[]}
+    />
+    <Button>
+      감사장 선물하기
+    </Button>
+  </>
+);
+
+interface RenderIndicatorProps extends HomeForFirstTimeProps {
   stage: number;
   onNext: () => void;
 }
 
-const RenderIndicator: React.FC<IRenderIndicatorProps> = ({ stage, onNext }) => {
+const RenderIndicator: React.FC<RenderIndicatorProps> = ({ stage, onNext }) => {
   switch (stage) {
     case 0:
       return (
@@ -41,7 +57,9 @@ const RenderIndicator: React.FC<IRenderIndicatorProps> = ({ stage, onNext }) => 
         />
       );
     default:
-      return null;
+      return (
+        <HomeForDefault />
+      );
   }
 };
 
