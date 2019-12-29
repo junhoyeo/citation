@@ -5,37 +5,22 @@ import Layout from '../components/Layout';
 import Field from '../components/molecules/Field';
 import Button from '../components/atoms/Button';
 
-const encodeString = (value: string) => {
-  return (
-    window.btoa(
-      encodeURIComponent(value)
-    )
-      .replace(/\./gi, '+')
-      .replace(/_/gi, '/')
-      .replace(/-/gi, '=')
-  );
-};
+import { encodeString } from '../utils/encoding';
+import { onChange, OnChangeEvent } from '../utils/events';
 
 const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [name, setName] = useState<string>('');
   const [thanks, setThanks] = useState<string>('');
   const [prefix, setPrefix] = useState<string>('');
 
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    callback: (value: string) => void
-  ) => {
-      callback(e.target.value);
-    };
+  const onChangeName = (event: OnChangeEvent) =>
+    onChange(event, setName);
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange(e, setName);
+  const onChangeThanks = (event: OnChangeEvent) =>
+    onChange(event, setThanks);
 
-  const onChangeThanks = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange(e, setThanks);
-
-  const onChangePrefix = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange(e, setPrefix);
+  const onChangePrefix = (event: OnChangeEvent) =>
+    onChange(event, setPrefix);
 
   const onClickGenerate = () => {
     const encodedData = [

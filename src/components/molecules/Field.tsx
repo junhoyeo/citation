@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
 
+import { OnChangeEvent } from '../../utils/events';
+
 type FieldProps = {
   label: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: OnChangeEvent) => void;
 };
 
 export const Field: React.FC<FieldProps> = ({ label, value, onChange }) => (

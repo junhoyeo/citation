@@ -3,6 +3,8 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Citation from '../components/templates/Citation';
 
+import { decodeString } from '../utils/encoding';
+
 interface ResultProps {
   match: {
     params: {
@@ -25,12 +27,7 @@ const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
       encodedString: string,
       callback: (value: string) => void
     ) => callback(
-      decodeURIComponent(
-        window.atob(encodedString),
-      )
-        .replace(/\+/gi, '.')
-        .replace(/\//gi, '_')
-        .replace(/=/gi, '-'),
+      decodeString(encodedString),
     );
 
     setToDecoded(encodedName, setName);
