@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Citation from '../components/templates/Citation';
 
 import { decodeString } from '../utils/encoding';
+import CreateButton from '../components/molecules/CreateButton';
 
 interface ResultProps {
   match: {
@@ -13,7 +14,7 @@ interface ResultProps {
   },
 };
 
-const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
+const Result: React.FC<RouteComponentProps & ResultProps> = ({ history, match }) => {
   const [name, setName] = useState<string>('');
   const [thanks, setThanks] = useState<string>('');
   const [prefix, setPrefix] = useState<string>('');
@@ -42,12 +43,17 @@ const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
   }, [match]);
 
   return (
-    <Citation
-      name={name}
-      thanks={thanks}
-      prefix={prefix}
-      sender={sender}
-    />
+    <>
+      <Citation
+        name={name}
+        thanks={thanks}
+        prefix={prefix}
+        sender={sender}
+      />
+      <CreateButton
+        onClick={() => history.push('/')}
+      />
+    </>
   );
 };
 
