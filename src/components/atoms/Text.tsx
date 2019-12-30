@@ -13,6 +13,10 @@ export const TextForTitle = styled(Text.withComponent('h1'))`
   line-height: 1.45;
 `;
 
+export const TextForSubtitle = Text.withComponent('h2');
+
+export const TextForSmalltitle = Text.withComponent('h3');
+
 export const TextForParagraph = Text.withComponent('p');
 
 export const TextForLabel = Text.withComponent('label');

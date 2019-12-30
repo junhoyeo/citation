@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Emoji from 'a11y-react-emoji';
 
@@ -10,6 +10,7 @@ import {
   TextForTitle,
   TextForParagraph,
 } from '../components/atoms/Text';
+import ShareModal from '../components/templates/ShareModal';
 
 import { encodeString } from '../utils/encoding';
 import { onChange, OnChangeEvent } from '../utils/events';
@@ -18,6 +19,15 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [name, setName] = useState<string>('');
   const [thanks, setThanks] = useState<string>('');
   const [prefix, setPrefix] = useState<string>('');
+  const [shareLink, setShareLink] = useState<string>('');
+  const [shareName, setShareName] = useState<string>('');
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    setShareName(
+      localStorage.getItem('sender') || '알 수 없음',
+    );
+  }, []);
 
   const onGenerate = () => {
     const encodedData = [
@@ -26,7 +36,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       encodeString(prefix),
     ].join('|');
 
-    console.log(`/result/${encodedData}`);
+    setShareLink(`/result/${encodedData}`);
   };
 
   const onChangeAndGenerate = (
@@ -45,6 +55,10 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
 
   const onChangePrefix = (event: OnChangeEvent) =>
     onChangeAndGenerate(event, setPrefix);
+
+  const onOpenModal = (): void => setOpenModal(true);
+
+  const onCloseModal = (): void => setOpenModal(false);
 
   return (
     <Layout>
@@ -77,14 +91,22 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
         value={prefix}
         onChange={onChangePrefix}
       />
-      <Button>
-        링크 공유하기
+      <Button
+        onClick={onOpenModal}
+      >
+        공유하기
       </Button>
       <Button
         primary={false}
       >
         미리보기
       </Button>
+      <ShareModal
+        isOpen={openModal}
+        shareLink={shareLink}
+        shareName={shareName}
+        onRequestClose={onCloseModal}
+      />
     </Layout>
   );
 };
