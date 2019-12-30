@@ -13,7 +13,7 @@ import Field from '../../components/molecules/Field';
 
 import { onChange, OnChangeEvent } from '../../utils/events';
 
-import welcomeIllust from '../../assets/welcome.png';
+import welcomeIllust from '../../assets/illusts/welcome.png';
 
 export interface HomeForFirstTimeProps {
   onNext: () => void;
