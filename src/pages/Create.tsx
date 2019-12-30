@@ -11,6 +11,7 @@ import {
   TextForTitle,
   TextForParagraph,
 } from '../components/atoms/Text';
+import { ICard } from '../components/organisms/Card';
 import ShareModal from '../components/templates/ShareModal';
 
 import { encodeString } from '../utils/encoding';
@@ -23,6 +24,8 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [shareLink, setShareLink] = useState<string>('');
   const [shareName, setShareName] = useState<string>('');
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [saved, setSaved] = useState<boolean>(false);
+  const [savedIndex, setSavedIndex] = useState<number>(0);
 
   useEffect(() => {
     setShareName(
@@ -66,8 +69,30 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       });
       return;
     }
-
     toast.dismiss();
+
+    const currentCard: ICard = {
+      name,
+      thanks,
+      prefix,
+    };
+
+    const storedCards = localStorage.getItem('cards');
+    const cards = storedCards ? JSON.parse(storedCards) : [];
+    if (saved) {
+      cards[savedIndex] = currentCard;
+      toast.info('수정한 내용 업데이트 성공!', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    } else {
+      cards.push(currentCard);
+      setSaved(true);
+      setSavedIndex(cards.length - 1);
+      toast.info('저장 성공!', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+    localStorage.setItem('cards', JSON.stringify(cards));
     setOpenModal(true);
   };
 
@@ -107,7 +132,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       <Button
         onClick={onOpenModal}
       >
-        공유하기
+        저장하고 공유하기
       </Button>
       <Button
         primary={false}

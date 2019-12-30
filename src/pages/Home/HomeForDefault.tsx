@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { History } from 'history';
 
@@ -9,6 +9,7 @@ import {
   Text,
   TextForTitle,
 } from '../../components/atoms/Text';
+import { ICard } from '../../components/organisms/Card';
 import CardList from '../../components/templates/CardList';
 
 import partyIllust from '../../assets/illusts/party.png';
@@ -18,6 +19,23 @@ export type HomeForDefaultProps = {
 };
 
 export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
+  const [sender, setSender] = useState<string>('');
+  const [cards, setCards] = useState<ICard[]>([]);
+
+  useEffect(() => {
+    const storedSender = localStorage.getItem('sender');
+    if (storedSender) {
+      setSender(storedSender);
+    } else {
+      window.location.reload();
+    }
+
+    const storedData = localStorage.getItem('cards');
+    if (storedData) {
+      setCards(JSON.parse(storedData) as ICard[]);
+    }
+  }, []);
+
   const onClickReset = () => {
     const confirm = window.confirm(
       '정말로 초기화하시겠습니까? 저장된 이름과 감사장 정보가 모두 삭제됩니다.',
@@ -34,7 +52,11 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
       <RelativeHeader>
         <TextForTitle>
           지금까지<br />
-          총 <Text>2,100</Text>장의<br />
+          총{' '}
+          <TextAboutNumber>
+            {cards.length.toLocaleString()}
+          </TextAboutNumber>
+          장의<br />
           감사장을<br />
           보내셨네요!
         </TextForTitle>
@@ -43,7 +65,8 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
         />
       </RelativeHeader>
       <CardList
-        cards={[]}
+        cards={cards}
+        sender={sender}
       />
       <ButtonList>
         <Button
@@ -70,6 +93,10 @@ const RelativeHeader = styled(Header)`
   @media (max-width: 500px) {
     position: unset;
   }
+`;
+
+const TextAboutNumber = styled(Text)`
+  color: #6C14FF;
 `;
 
 const AbsoluteIllust = styled(Illust)`

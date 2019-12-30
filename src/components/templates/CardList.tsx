@@ -3,19 +3,24 @@ import styled from 'styled-components';
 
 import {
   Card,
-  CardProps,
+  ICard,
 } from '../organisms/Card';
 
 type CardListProps = {
-  cards: CardProps[];
+  cards: ICard[];
+  sender: string;
 };
 
-export const CardList: React.FC<CardListProps> = ({ cards }) => {
+export const CardList: React.FC<CardListProps> = ({ cards, sender }) => {
   return (
     <CardListContainer>
-      {cards.map((card, idx) => (
+      {cards.map(({ name, thanks, prefix }, idx) => (
         <Card
           key={`card-${idx}`}
+          name={name}
+          thanks={thanks}
+          prefix={prefix}
+          sender={sender}
         />
       ))}
     </CardListContainer>
