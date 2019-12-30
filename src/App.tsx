@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Normalize from 'react-normalize';
 import {
   HashRouter as Router,
@@ -13,7 +13,13 @@ import {
   Result,
 } from './pages';
 
+import { initializeKakaotalk } from './utils/share';
+
 const App: React.FC = () => {
+  useEffect(() => {
+    initializeKakaotalk();
+  }, []);
+
   return (
     <>
       <Normalize />

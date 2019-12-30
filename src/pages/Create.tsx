@@ -21,7 +21,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [prefix, setPrefix] = useState<string>('');
   const [shareLink, setShareLink] = useState<string>('');
   const [shareName, setShareName] = useState<string>('');
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(true);
 
   useEffect(() => {
     setShareName(
