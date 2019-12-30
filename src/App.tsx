@@ -31,7 +31,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/create" component={Create} />
-            <Route path="/result/:encodedData" component={Result} />
+            <Route exact path="/result/:encodedData" component={Result} />
           </Switch>
           <ToastContainer />
         </AppContainer>
