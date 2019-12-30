@@ -11,7 +11,7 @@ export const shareWithKakaotalk = (shareLink: string, shareName: string): void =
     content: {
       title: `${shareName} 님께 새로운 감사장이 도착했어요!`,
       description: '🎉 아래 버튼을 눌러서 확인해 주세요.',
-      imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+      imageUrl: 'https://raw.githubusercontent.com/junhoyeo/citation/master/src/assets/images/kakao.png',
       link: {
         mobileWebUrl: shareLink,
         webUrl: shareLink,
