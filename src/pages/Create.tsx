@@ -16,6 +16,7 @@ import ShareModal from '../components/templates/ShareModal';
 
 import callbackAfterGenerate from '../utils/encoding';
 import { onChange, OnChangeEvent } from '../utils/events';
+import onOpenPreview from '../utils/preview';
 
 const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [name, setName] = useState<string>('');
@@ -86,6 +87,10 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
 
   const onCloseModal = (): void => setOpenModal(false);
 
+  const onClickPreview = (): void => {
+    onOpenPreview(name, thanks, prefix, shareName);
+  };
+
   return (
     <Layout>
       <Header>
@@ -124,6 +129,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       </Button>
       <Button
         primary={false}
+        onClick={onClickPreview}
       >
         미리보기
       </Button>
