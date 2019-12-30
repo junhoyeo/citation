@@ -15,3 +15,23 @@ export const decodeString = (encoded: string): string => (
     .replace(/\//gi, '_')
     .replace(/=/gi, '-')
 );
+
+export const callbackAfterGenerate = (
+  name: string,
+  thanks: string,
+  prefix: string,
+  shareName: string,
+  callback: (link: string) => void,
+) => {
+    const encodedData = [
+      encodeString(name),
+      encodeString(thanks),
+      encodeString(prefix),
+      encodeString(shareName),
+    ].join('|');
+
+    const rootURL = window.location.href.split('/').slice(0, -1).join('/');
+    callback(`${rootURL}/result/${encodedData}`);
+  };
+
+export default callbackAfterGenerate;

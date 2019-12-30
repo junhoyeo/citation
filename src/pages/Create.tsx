@@ -14,7 +14,7 @@ import {
 import { ICard } from '../components/organisms/Card';
 import ShareModal from '../components/templates/ShareModal';
 
-import { encodeString } from '../utils/encoding';
+import callbackAfterGenerate from '../utils/encoding';
 import { onChange, OnChangeEvent } from '../utils/events';
 
 const Create: React.FC<RouteComponentProps> = ({ history }) => {
@@ -33,24 +33,12 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
     );
   }, []);
 
-  const onGenerate = () => {
-    const encodedData = [
-      encodeString(name),
-      encodeString(thanks),
-      encodeString(prefix),
-      encodeString(shareName),
-    ].join('|');
-
-    const rootURL = window.location.href.split('/').slice(0, -1).join('/');
-    setShareLink(`${rootURL}/result/${encodedData}`);
-  };
-
   const onChangeAndGenerate = (
     event: OnChangeEvent,
     handler: React.Dispatch<React.SetStateAction<string>>,
   ) => {
       onChange(event, handler);
-      onGenerate();
+      callbackAfterGenerate(name, thanks, prefix, shareName, setShareLink);
     };
 
   const onChangeName = (event: OnChangeEvent) =>

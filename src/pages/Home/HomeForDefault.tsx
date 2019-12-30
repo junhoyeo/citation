@@ -13,6 +13,8 @@ import {
 import { ICard } from '../../components/organisms/Card';
 import CardList from '../../components/templates/CardList';
 
+import callbackAfterGenerate from '../../utils/encoding';
+
 import partyIllust from '../../assets/illusts/party.png';
 
 export type HomeForDefaultProps = {
@@ -52,7 +54,13 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
     }
   };
 
-  const onClickPlane = (card: ICard) => {};
+  const onClickPlane = ({ name, thanks, prefix }: ICard) => {
+    callbackAfterGenerate(name, thanks, prefix, name,
+      (link: string) => {
+        const win = window.open(link, '_blank');
+        win?.focus();
+      });
+  };
 
   const onClickTrash = (cardID: number) => {
     cards.splice(cardID - 1, 1);
