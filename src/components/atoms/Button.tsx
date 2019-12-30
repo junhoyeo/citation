@@ -28,13 +28,13 @@ export const Button = styled.button<ButtonProps>`
   }
 
   ${({ primary = true }) => !primary && css`
-    background-color: transparent;
+    background-color: white;
     border: 2px solid #6C14FF;
     color: #6C14FF;
 
     &:hover,
     &:focus {
-      background-color: transparent;
+      background-color: white;
       border: 2px solid #610eeb;
       color: #610eeb;
     }

@@ -20,6 +20,7 @@ export const CardList: React.FC<CardListProps> = ({ cards, sender }) => {
           name={name}
           thanks={thanks}
           prefix={prefix}
+          cardID={idx + 1}
           sender={sender}
         />
       ))}
@@ -30,4 +31,8 @@ export const CardList: React.FC<CardListProps> = ({ cards, sender }) => {
 export default CardList;
 
 const CardListContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 150px;
 `;
