@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Emoji from 'a11y-react-emoji';
 
@@ -21,7 +22,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [prefix, setPrefix] = useState<string>('');
   const [shareLink, setShareLink] = useState<string>('');
   const [shareName, setShareName] = useState<string>('');
-  const [openModal, setOpenModal] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     setShareName(
@@ -57,7 +58,17 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const onChangePrefix = (event: OnChangeEvent) =>
     onChangeAndGenerate(event, setPrefix);
 
-  const onOpenModal = (): void => setOpenModal(true);
+  const onOpenModal = (): void => {
+    if (!name || !thanks) {
+      toast.error(`${name ? '감사 인사를' : '이름을'} 입력해 주세요!`, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      return;
+    }
+
+    toast.dismiss();
+    setOpenModal(true);
+  };
 
   const onCloseModal = (): void => setOpenModal(false);
 
@@ -87,7 +98,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
         onChange={onChangeThanks}
       />
       <Field
-        label="당신을 표현하는 수식어"
+        label="당신을 표현하는 수식어 (필수는 아니랍니다!)"
         placeholder="예시: '사랑하는 아들'"
         value={prefix}
         onChange={onChangePrefix}

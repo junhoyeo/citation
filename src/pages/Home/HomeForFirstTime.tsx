@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Emoji from 'a11y-react-emoji';
 
 import Button from '../../components/atoms/Button';
@@ -8,9 +9,9 @@ import {
   TextForTitle,
   TextForParagraph,
 } from '../../components/atoms/Text';
+import Field from '../../components/molecules/Field';
 
 import { onChange, OnChangeEvent } from '../../utils/events';
-import Field from '../../components/molecules/Field';
 
 import welcomeIllust from '../../assets/welcome.png';
 
@@ -25,6 +26,14 @@ export const HomeForFirstTime: React.FC<HomeForFirstTimeProps> = ({ onNext }) =>
     onChange(event, setSender);
 
   const onClickSave = () => {
+    if (!sender) {
+      toast.error('이름을 입력해 주세요.', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      return;
+    }
+
+    toast.dismiss();
     localStorage.setItem('sender', sender);
     onNext();
   };

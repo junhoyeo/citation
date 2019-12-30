@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import Normalize from 'react-normalize';
 import {
   HashRouter as Router,
@@ -30,6 +31,7 @@ const App: React.FC = () => {
             <Route exact path="/create" component={Create} />
             <Route exact path="/result/:encodedData" component={Result} />
           </Switch>
+          <ToastContainer />
         </AppContainer>
       </Router>
     </>
