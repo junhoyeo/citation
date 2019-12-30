@@ -24,7 +24,9 @@ const App: React.FC = () => {
   return (
     <>
       <Normalize />
-      <Router>
+      <Router
+        basename="https://junhoyeo.github.io/citation/"
+      >
         <AppContainer>
           <Switch>
             <Route exact path="/" component={Home} />
