@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { History } from 'history';
 
@@ -22,6 +23,13 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
   const [sender, setSender] = useState<string>('');
   const [cards, setCards] = useState<ICard[]>([]);
 
+  const onUpdateCards = () => {
+    const storedData = localStorage.getItem('cards');
+    if (storedData) {
+      setCards(JSON.parse(storedData) as ICard[]);
+    }
+  };
+
   useEffect(() => {
     const storedSender = localStorage.getItem('sender');
     if (storedSender) {
@@ -30,10 +38,7 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
       window.location.reload();
     }
 
-    const storedData = localStorage.getItem('cards');
-    if (storedData) {
-      setCards(JSON.parse(storedData) as ICard[]);
-    }
+    onUpdateCards();
   }, []);
 
   const onClickReset = () => {
@@ -45,6 +50,17 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
       localStorage.clear();
       window.location.reload();
     }
+  };
+
+  const onClickPlane = (card: ICard) => {};
+
+  const onClickTrash = (cardID: number) => {
+    cards.splice(cardID - 1, 1);
+    localStorage.setItem('cards', JSON.stringify(cards));
+    toast.info('삭제 성공!', {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+    onUpdateCards();
   };
 
   return (
@@ -67,6 +83,8 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
       <CardList
         cards={cards}
         sender={sender}
+        onClickPlane={onClickPlane}
+        onClickTrash={onClickTrash}
       />
       <ButtonList>
         <Button

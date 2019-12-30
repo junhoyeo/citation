@@ -9,24 +9,30 @@ import {
 type CardListProps = {
   cards: ICard[];
   sender: string;
+  onClickPlane: (card: ICard) => void;
+  onClickTrash: (cardID: number) => void;
 };
 
-export const CardList: React.FC<CardListProps> = ({ cards, sender }) => {
-  return (
-    <CardListContainer>
-      {cards.map(({ name, thanks, prefix }, idx) => (
-        <Card
-          key={`card-${idx}`}
-          name={name}
-          thanks={thanks}
-          prefix={prefix}
-          cardID={idx + 1}
-          sender={sender}
-        />
-      ))}
-    </CardListContainer>
-  );
-};
+export const CardList: React.FC<CardListProps> = ({
+  cards, sender, onClickPlane, onClickTrash
+}) => {
+    return (
+      <CardListContainer>
+        {cards.map(({ name, thanks, prefix }, idx) => (
+          <Card
+            key={`card-${idx}`}
+            name={name}
+            thanks={thanks}
+            prefix={prefix}
+            cardID={idx + 1}
+            sender={sender}
+            onClickPlane={onClickPlane}
+            onClickTrash={onClickTrash}
+          />
+        ))}
+      </CardListContainer>
+    );
+  };
 
 export default CardList;
 

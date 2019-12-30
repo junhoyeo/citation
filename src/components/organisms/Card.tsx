@@ -19,39 +19,45 @@ export interface ICard {
 export interface CardProps extends ICard {
   cardID: number;
   sender: string;
+  onClickPlane: (card: ICard) => void;
+  onClickTrash: (cardID: number) => void;
 }
 
-export const Card: React.FC<CardProps> = ({ name, thanks, prefix, cardID, sender }) => {
-  return (
-    <CardWrapper>
-      <CardIllust
-        src={treeIllust}
-      />
-      <CardInfo>
-        <CardIdentifier>
-          {`감사장 #${cardID}`}
-        </CardIdentifier>
-        <CardSender>
-          <TextAboutPrefix>
-            {prefix}
-          </TextAboutPrefix>
-          {' '}{sender} 올림
-        </CardSender>
-        <CardReceiver>
-          <TextAboutName>{name}</TextAboutName> 님께
-        </CardReceiver>
-      </CardInfo>
-      <IconContainer>
-        <IconButton
-          src={planeIcon}
+export const Card: React.FC<CardProps> = ({
+  name, thanks, prefix, cardID, sender, onClickPlane, onClickTrash
+}) => {
+    return (
+      <CardWrapper>
+        <CardIllust
+          src={treeIllust}
         />
-        <IconButton
-          src={trashIcon}
-        />
-      </IconContainer>
-    </CardWrapper>
-  );
-};
+        <CardInfo>
+          <CardIdentifier>
+            {`감사장 #${cardID}`}
+          </CardIdentifier>
+          <CardSender>
+            <TextAboutPrefix>
+              {prefix}
+            </TextAboutPrefix>
+            {' '}{sender} 올림
+          </CardSender>
+          <CardReceiver>
+            <TextAboutName>{name}</TextAboutName> 님께
+          </CardReceiver>
+        </CardInfo>
+        <IconContainer>
+          <IconButton
+            src={planeIcon}
+            onClick={() => onClickPlane({ name, thanks, prefix })}
+          />
+          <IconButton
+            src={trashIcon}
+            onClick={() => onClickTrash(cardID)}
+          />
+        </IconContainer>
+      </CardWrapper>
+    );
+  };
 
 export default Card;
 
