@@ -35,6 +35,7 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       encodeString(name),
       encodeString(thanks),
       encodeString(prefix),
+      encodeString(shareName),
     ].join('|');
 
     const rootURL = window.location.href.split('/').slice(0, -1).join('/');

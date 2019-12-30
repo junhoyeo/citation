@@ -21,7 +21,12 @@ const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
 
   useEffect(() => {
     const { params: { encodedData } } = match;
-    const [encodedName, encodedThanks, encodedPrefix] = encodedData.split('|');
+    const [
+      encodedName,
+      encodedThanks,
+      encodedPrefix,
+      encodedSender,
+    ] = encodedData.split('|');
 
     const setToDecoded = (
       encodedString: string,
@@ -33,9 +38,7 @@ const Result: React.FC<RouteComponentProps & ResultProps> = ({ match }) => {
     setToDecoded(encodedName, setName);
     setToDecoded(encodedThanks, setThanks);
     setToDecoded(encodedPrefix, setPrefix);
-
-    const savedSender = localStorage.getItem('sender') || '알 수 없음';
-    setSender(savedSender);
+    setToDecoded(encodedSender, setSender);
   }, [match]);
 
   return (
