@@ -36,7 +36,8 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       encodeString(prefix),
     ].join('|');
 
-    setShareLink(`/result/${encodedData}`);
+    const rootURL = window.location.href.split('/').slice(0, -1).join('/');
+    setShareLink(`${rootURL}/result/${encodedData}`);
   };
 
   const onChangeAndGenerate = (

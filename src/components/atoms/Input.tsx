@@ -7,6 +7,7 @@ export const Input = styled.input`
   border-bottom: 2px solid #dee2e6;
   transition: border-color 0.2s ease-out;
   line-height: 1.5;
+  box-sizing: border-box;
 
   &:focus {
     border-color: #610eeb;
