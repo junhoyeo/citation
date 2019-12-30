@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga';
+
 declare const Kakao: any;
 
 export const initializeKakaotalk = () => {
@@ -27,10 +29,18 @@ export const shareWithKakaotalk = (shareLink: string, shareName: string): void =
       },
     ],
   });
+  ReactGA.event({
+    category: 'Share',
+    action: 'kakaotalk',
+  });
 };
 
 export const shareWithFacebook = (shareLink: string, shareName: string): void => {
   const shareTitle = `${shareName} 님께 새로운 감사장이 도착했어요!`;
   const shareURL = `https://www.facebook.com/sharer.php?u=${shareLink}&t=${shareTitle}`;
   window.open(shareURL, '', 'width=500,height=500,left=600');
+  ReactGA.event({
+    category: 'Share',
+    action: 'Facebook',
+  });
 };

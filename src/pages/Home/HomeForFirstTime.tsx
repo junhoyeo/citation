@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactGA from 'react-ga';
 import { toast } from 'react-toastify';
 import Emoji from 'a11y-react-emoji';
 
@@ -35,6 +36,10 @@ export const HomeForFirstTime: React.FC<HomeForFirstTimeProps> = ({ onNext }) =>
 
     toast.dismiss();
     localStorage.setItem('sender', sender);
+    ReactGA.event({
+      category: 'User',
+      action: 'Start',
+    });
     onNext();
   };
 

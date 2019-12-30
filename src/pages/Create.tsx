@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactGA from 'react-ga';
 import { toast } from 'react-toastify';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Emoji from 'a11y-react-emoji';
@@ -82,6 +83,10 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
       });
     }
     localStorage.setItem('cards', JSON.stringify(cards));
+    ReactGA.event({
+      category: 'User',
+      action: 'Save',
+    });
     setOpenModal(true);
   };
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactGA from 'react-ga';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { History } from 'history';
@@ -83,19 +84,33 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
     );
 
     if (confirm) {
+      ReactGA.event({
+        category: 'User',
+        action: 'Reset',
+      });
       localStorage.clear();
       window.location.reload();
     }
   };
 
-  const onClickPlane = ({ name, thanks, prefix }: ICard) =>
+  const onClickPlane = ({ name, thanks, prefix }: ICard) => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Preview',
+      label: 'Plane',
+    });
     onOpenPreview(name, thanks, prefix, sender);
+  };
 
   const onClickTrash = (cardID: number) => {
     cards.splice(cardID - 1, 1);
     localStorage.setItem('cards', JSON.stringify(cards));
     toast.info('삭제 성공!', {
       position: toast.POSITION.BOTTOM_CENTER,
+    });
+    ReactGA.event({
+      category: 'User',
+      action: 'Remove',
     });
     onUpdateCards();
   };

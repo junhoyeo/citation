@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ReactGA from 'react-ga';
 import { ToastContainer } from 'react-toastify';
 import Normalize from 'react-normalize';
 import {
@@ -14,7 +15,16 @@ import {
   Result,
 } from './pages';
 
+import RouteWrapper from './components/RouteWrapper';
+
 import { initializeKakaotalk } from './utils/share';
+
+ReactGA.initialize('UA-152536759-2');
+
+const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+};
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -28,11 +38,15 @@ const App: React.FC = () => {
         basename="/citation"
       >
         <AppContainer>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/create" component={Create} />
-            <Route exact path="/result/:encodedData" component={Result} />
-          </Switch>
+          <RouteWrapper
+            logPageView={logPageView}
+          >
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/create" component={Create} />
+              <Route exact path="/result/:encodedData" component={Result} />
+            </Switch>
+          </RouteWrapper>
           <ToastContainer />
         </AppContainer>
       </BrowserRouter>
