@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Normalize from 'react-normalize';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch,
 } from 'react-router-dom';
 import styled from 'styled-components';
+import { createBrowserHistory } from 'history';
 
 import {
   Create,
@@ -15,6 +16,8 @@ import {
 } from './pages';
 
 import { initializeKakaotalk } from './utils/share';
+
+const history = createBrowserHistory();
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -25,7 +28,7 @@ const App: React.FC = () => {
     <>
       <Normalize />
       <Router
-        basename="https://junhoyeo.github.io/citation/"
+        history={history}
       >
         <AppContainer>
           <Switch>
