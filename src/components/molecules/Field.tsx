@@ -33,6 +33,10 @@ const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const FieldLabel = styled(TextForLabel)`
