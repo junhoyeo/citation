@@ -17,6 +17,40 @@ import onOpenPreview from '../../utils/preview';
 
 import partyIllust from '../../assets/illusts/party.png';
 
+type ConditionalTitleProps = {
+  length: number;
+};
+
+const ConditionalTitle: React.FC<ConditionalTitleProps> = ({ length }) => {
+  if (!length) {
+    return (
+      <TextForTitle>
+        환영해요!<br />
+        <TextAboutNumber>
+          첫
+        </TextAboutNumber>
+        {' '}
+        감사장을<br />
+        지금 바로<br />
+        보내 보세요.
+      </TextForTitle>
+    );
+  }
+
+  return (
+    <TextForTitle>
+      지금까지<br />
+      총{' '}
+      <TextAboutNumber>
+        {length.toLocaleString()}
+      </TextAboutNumber>
+      장의<br />
+      감사장을<br />
+      보내셨네요!
+    </TextForTitle>
+  );
+};
+
 export type HomeForDefaultProps = {
   history: History,
 };
@@ -69,16 +103,9 @@ export const HomeForDefault: React.FC<HomeForDefaultProps> = ({ history }) => {
   return (
     <>
       <RelativeHeader>
-        <TextForTitle>
-          지금까지<br />
-          총{' '}
-          <TextAboutNumber>
-            {cards.length.toLocaleString()}
-          </TextAboutNumber>
-          장의<br />
-          감사장을<br />
-          보내셨네요!
-        </TextForTitle>
+        <ConditionalTitle
+          length={cards.length}
+        />
         <AbsoluteIllust
           src={partyIllust}
         />
