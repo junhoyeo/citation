@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "감사장",
+  "name": "새해에는 감사장",
   "icons": [
     {
       "src": "favicon.ico",
