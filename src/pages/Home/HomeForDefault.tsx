@@ -115,10 +115,18 @@ const AbsoluteIllust = styled(Illust)`
 const ButtonList = styled.div`
   position: fixed;
   bottom: 0;
-  width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 1.5rem;
+  background: linear-gradient(to top, #fff 90%, rgba(255, 255, 255, 0.3));
 
-  @media (max-width: 500px) {
-    width: 80%;
+  button {
+    width: 400px;
+
+    @media (max-width: 500px) {
+      width: 80%;
+    }
   }
 `;
