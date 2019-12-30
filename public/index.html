@@ -35,7 +35,7 @@
           var q = {};
           l.search.slice(1).split('&').forEach(function(v) {
             var a = v.split('=');
-            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+            q[a[0]] = decodeURIComponent(a.slice(1).join('='));
           });
           if (q.p !== undefined) {
             window.history.replaceState(null, null,
@@ -45,7 +45,7 @@
             );
           }
         }
-      }(window.location))
+      }(window.location));
     </script>
   </head>
   <body>

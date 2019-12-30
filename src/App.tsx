@@ -25,7 +25,7 @@ const App: React.FC = () => {
     <>
       <Normalize />
       <BrowserRouter
-        basename="/citation/"
+        basename="/citation"
       >
         <AppContainer>
           <Switch>
