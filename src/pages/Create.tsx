@@ -19,24 +19,32 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
   const [thanks, setThanks] = useState<string>('');
   const [prefix, setPrefix] = useState<string>('');
 
-  const onChangeName = (event: OnChangeEvent) =>
-    onChange(event, setName);
-
-  const onChangeThanks = (event: OnChangeEvent) =>
-    onChange(event, setThanks);
-
-  const onChangePrefix = (event: OnChangeEvent) =>
-    onChange(event, setPrefix);
-
-  const onClickGenerate = () => {
+  const onGenerate = () => {
     const encodedData = [
       encodeString(name),
       encodeString(thanks),
       encodeString(prefix),
     ].join('|');
 
-    history.push(`/result/${encodedData}`);
+    console.log(`/result/${encodedData}`);
   };
+
+  const onChangeAndGenerate = (
+    event: OnChangeEvent,
+    handler: React.Dispatch<React.SetStateAction<string>>,
+  ) => {
+      onChange(event, handler);
+      onGenerate();
+    };
+
+  const onChangeName = (event: OnChangeEvent) =>
+    onChangeAndGenerate(event, setName);
+
+  const onChangeThanks = (event: OnChangeEvent) =>
+    onChangeAndGenerate(event, setThanks);
+
+  const onChangePrefix = (event: OnChangeEvent) =>
+    onChangeAndGenerate(event, setPrefix);
 
   return (
     <Layout>
@@ -69,10 +77,13 @@ const Create: React.FC<RouteComponentProps> = ({ history }) => {
         value={prefix}
         onChange={onChangePrefix}
       />
+      <Button>
+        링크 공유하기
+      </Button>
       <Button
-        onClick={onClickGenerate}
+        primary={false}
       >
-        감사장 만들기
+        미리보기
       </Button>
     </Layout>
   );

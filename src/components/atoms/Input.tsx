@@ -6,6 +6,7 @@ export const Input = styled.input`
   background-color: #f8f9fa;
   border-bottom: 2px solid #dee2e6;
   transition: border-color 0.2s ease-out;
+  line-height: 1.5;
 
   &:focus {
     border-color: #610eeb;
