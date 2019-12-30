@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Normalize from 'react-normalize';
 import {
-  HashRouter as Router,
+  BrowserRouter,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -24,7 +24,9 @@ const App: React.FC = () => {
   return (
     <>
       <Normalize />
-      <Router>
+      <BrowserRouter
+        basename="/citation"
+      >
         <AppContainer>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -33,7 +35,7 @@ const App: React.FC = () => {
           </Switch>
           <ToastContainer />
         </AppContainer>
-      </Router>
+      </BrowserRouter>
     </>
   );
 };
