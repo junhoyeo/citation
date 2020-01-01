@@ -1,4 +1,10 @@
-# 새해에는 감사장
+<h1 align="center">새해에는 감사장</h1>
+
+<div align="center">
+  <a href="https://junhoyeo.github.io/citation">
+    <img src="./src/assets/illusts/present.png" alt="Citations in new year" width="400px"/>
+  </a>
+</div>
 
 ## 👋 Screens
 
