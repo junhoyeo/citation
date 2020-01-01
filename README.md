@@ -2,10 +2,7 @@
 
 ## 👋 Screens
 
-<img alt="start" src="./screenshots/start.png" width="24.75%">
-<img alt="create" src="./screenshots/create.png" width="24.75%">
-<img alt="share" src="./screenshots/share.png" width="24.75%">
-<img alt="citation" src="./screenshots/citation.png" width="24.75%">
+<img alt="start" src="./screenshots/start.png" width="24.75%"><img alt="create" src="./screenshots/create.png" width="24.75%"><img alt="share" src="./screenshots/share.png" width="24.75%"><img alt="citation" src="./screenshots/citation.png" width="24.75%">
 
 > 감사장을 생성하고, 공유할 수 있습니다.
 
