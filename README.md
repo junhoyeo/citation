@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://junhoyeo.github.io/citation">
-    <img src="./src/assets/illusts/present.png" alt="Citations in new year" width="400px"/>
+    <img src="./src/assets/illusts/present.png" alt="Citations in new year" width="256px"/>
   </a>
 </div>
 
